@@ -1,25 +1,31 @@
-import logo from './logo.svg';
-import './App.css';
+import {useState, useEffect} from "react";
+import "./App.css";
+import CardValidation from "./components/CardValidation";
+import Form from "./components/Form";
 
-function App() {
+export default function App() {
+  //variable with your apiKey
+  const apiKey = "98e3fb1f";
+
+  //State to hold credit card data
+  const [creditCard, setCreditCard] = useState(null);
+
+  //Function to validate the credit card number
+  const getcard =  (card_number) => {
+    //console.log(`Credit card ${card_number}`)
+    setCreditCard(card_number);
+  }
+
+  //This will run on the first render but not on subsquent renders
+  useEffect(() => {
+    getcard("");
+  }, []);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Form card_val={getcard} />
+      <CardValidation card={creditCard} />
     </div>
   );
 }
-
-export default App;
+//71934a67
